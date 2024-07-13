@@ -1,41 +1,48 @@
 import React, { useState, useEffect } from "react";
+import Kaisepo from '/src/assets/kaisepo.jpg';
+import jumbotron from '/src/assets/jumbotron.jpg';
+import Biak1 from '/src/assets/biak1.jpg';
+import wapsdori from '/src/assets/Jumbotron/wapsdori.png';
+import dongeng from '/src/assets/Jumbotron/dongeng.png';
+import warsa from '/src/assets/Jumbotron/warsa.png';
+
 
 const slides = [
   {
     title: "Welcome to Web Checkin",
     subtitle: "Frans Kaisepo Airport",
-    image: "/src/assets/kaisepo.jpg",
+    image: Kaisepo,
     description: "Experience the convenience of our streamlined online check-in process. Select your seat, enter your details, and get ready to fly."
   },
   {
     title: "Explore the World",
     subtitle: "With Our Flights",
-    image: "/src/assets/jumbotron.jpg",
+    image:jumbotron,
     description: "Discover new destinations with our extensive network of flights. Book now and start your adventure."
   },
   {
     title: "Comfort and Safety",
     subtitle: "On Every Flight",
-    image: "/src/assets/biak1.jpg",
+    image: Biak1,
     description: "Enjoy the highest standards of comfort and safety on all our flights. Your satisfaction is our priority."
   },
   {
     title: "Discover Wapsdori",
     subtitle: "A Hidden Paradise in Biak",
-    image: "/src/assets/Jumbotron/wapsdori.png",
+    image: wapsdori,
     description: "Immerse yourself in the serene beauty of Wapsdori, a captivating village on Biak Island. Enjoy its pristine beaches and vibrant local culture."
   },
   {
     title: "Explore Negeri Dongeng",
     subtitle: "A Fantasy Land in Biak",
-    image: "/src/assets/Jumbotron/dongeng.png",
+    image: dongeng,
     description: "Step into Negeri Dongeng, a whimsical and enchanting tourist spot on Biak Island. Experience its lush landscapes and unique attractions that seem straight out of a fairy tale."
   },
   
   {
     title: "Explore Warsa Waterfall",
     subtitle: "A Captivating Natural Wonder",
-    image: "/src/assets/Jumbotron/warsa.png",
+    image: warsa,
     description: "Discover the breathtaking Warsa Waterfall in Biak. Surrounded by lush tropical forests, the waterfall offers a refreshing retreat and a picturesque landscape perfect for nature lovers and adventurers alike."
   }
   
