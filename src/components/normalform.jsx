@@ -150,7 +150,7 @@ export default function NormfalForm() {
   const handleAirlineChange = (selectedOption) => {
     setFormData((prevData) => ({
       ...prevData,
-      airline: selectedOption.value
+      airline: selectedOption ? selectedOption.value : ""
     }));
   };
 
@@ -164,7 +164,7 @@ export default function NormfalForm() {
   const handleAirportChange = (selectedOption, action) => {
     setFormData((prevData) => ({
       ...prevData,
-      [action.name]: selectedOption.value
+      [action.name]: selectedOption ? selectedOption.value : ""
     }));
   };
 
@@ -228,24 +228,22 @@ export default function NormfalForm() {
       confirmButtonText: "OK"
     }).then((result) => {
       if (result.isConfirmed || result.dismiss === Swal.DismissReason.backdrop) {
+        // Reset form data
         setFormData({
           kodepemesanan: "",
           namabelakang: "",
           message: "",
-          airline: "",
+          airline: formData.airline,
           selectedDate: null,
           seat: "",
-          originAirport: "",
-          destinationAirport: ""
+          originAirport: formData.originAirport,
+          destinationAirport: formData.destinationAirport
         });
-  
-       
       }
     });
   };
   
-  
-  
+
   const airlineOptions = airlines.map((airline) => ({
     value: airline.name,
     label: (
@@ -275,6 +273,7 @@ export default function NormfalForm() {
             options={airlineOptions}
             formatOptionLabel={option => option.label}
             className="mt-1"
+            isClearable
             required
           />
         </div>
@@ -313,6 +312,7 @@ export default function NormfalForm() {
             onChange={(option, action) => handleAirportChange(option, action)}
             options={airportOptions}
             className="mt-1"
+            isClearable
             required
           />
         </div>
@@ -325,6 +325,7 @@ export default function NormfalForm() {
             onChange={(option, action) => handleAirportChange(option, action)}
             options={airportOptions}
             className="mt-1"
+            isClearable
             required
           />
         </div>
