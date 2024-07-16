@@ -9,6 +9,7 @@ import lionAirLogo from '/src/assets/Airline/lionair.png';
 import batikAirLogo from '/src/assets/Airline/batikair.png';
 import citilinkLogo from '/src/assets/Airline/citilink.png';
 import sriwijayaLogo from '/src/assets/Airline/sriwijaya.png';
+import qr from '/src/assets/qr.jpeg';
 
 export default function NormfalForm() {
   const [formData, setFormData] = useState({
@@ -17,15 +18,48 @@ export default function NormfalForm() {
     message: "",
     airline: "",
     selectedDate: null,
-    seat: "" // State untuk menyimpan pilihan maskapai
+    seat: "",
+    originAirport: "",
+    destinationAirport: ""
   });
 
   const airlines = [
-    { name: "Garuda Indonesia", logo: garudaLogo },
-    { name: "Lion Air", logo: lionAirLogo },
-    { name: "Batik Air", logo: batikAirLogo },
-    { name: "Citilink", logo: citilinkLogo },
-    { name: "Sriwijaya Air", logo: sriwijayaLogo }
+    { name: "Garuda Indonesia", logo: garudaLogo, flightCode: "GA-610" },
+    { name: "Lion Air", logo: lionAirLogo, flightCode: "JT-320" },
+    { name: "Batik Air", logo: batikAirLogo, flightCode: "ID-6542" },
+    { name: "Citilink", logo: citilinkLogo, flightCode: "QG-112" },
+    { name: "Sriwijaya Air", logo: sriwijayaLogo, flightCode: "SJ-182" }
+  ];
+  
+  const airports = [
+    {
+      city: "Biak Numfor",
+      airport: "Frans Kaisiepo International Airport"
+    },
+    {
+      city: "Jayapura",
+      airport: "Sentani International Airport"
+    },
+    {
+      city: "Makassar",
+      airport: "Sultan Hasanuddin International Airport"
+    },
+    {
+      city: "Yogyakarta",
+      airport: "Yogyakarta International Airport"
+    },
+    {
+      city: "Jakarta",
+      airport: "Soekarno-Hatta International Airport"
+    },
+    {
+      city: "Bali",
+      airport: "Ngurah Rai International Airport"
+    },
+    {
+      city: "Medan",
+      airport: "Kualanamu International Airport"
+    }
   ];
 
   const seats = [
@@ -47,56 +81,56 @@ export default function NormfalForm() {
     ["16A", "16C", "16D", "16F"],
     ["17A", "17C", "17D", "17F"],
     ["18A", "18C", "18D", "18F"]
-];
+  ];
 
-const SeatSection = ({ title, seats }) => (
-  <div className="mb-6">
-    <h2 className="text-lg font-bold mb-2">{title}</h2>
-    <div className="grid grid-cols-5 gap-2">
-      {seats.map((row) => (
-        <React.Fragment key={row[0]}>
-          <button
-            type="button"
-            onClick={() => handleSeatClick(row[0])}
-            className={`p-2 border rounded ${
-              formData.seat === row[0] ? "bg-blue-500 text-white text-[10px] sm:text-[16px]" : "bg-gray-200 text-black text-[10px] sm:text-[16px]"
-            }`}
-          >
-            {row[0]}
-          </button>
-          <button
-            type="button"
-            onClick={() => handleSeatClick(row[1])}
-            className={`p-2 border rounded ${
-              formData.seat === row[1] ? "bg-blue-500 text-white text-[10px] sm:text-[16px]" : "bg-gray-200 text-black text-[10px] sm:text-[16px]"
-            }`}
-          >
-            {row[1]}
-          </button>
-          <div className="w-4"></div> {/* Empty div for extra space */}
-          <button
-            type="button"
-            onClick={() => handleSeatClick(row[2])}
-            className={`p-2 border rounded ${
-              formData.seat === row[2] ? "bg-blue-500 text-white text-[10px] sm:text-[16px]" : "bg-gray-200 text-black text-[10px] sm:text-[16px]"
-            }`}
-          >
-            {row[2]}
-          </button>
-          <button
-            type="button"
-            onClick={() => handleSeatClick(row[3])}
-            className={`p-2 border rounded ${
-              formData.seat === row[3] ? "bg-blue-500 text-white text-[10px] sm:text-[16px]" : "bg-gray-200 text-black text-[10px] sm:text-[16px]"
-            }`}
-          >
-            {row[3]}
-          </button>
-        </React.Fragment>
-      ))}
+  const SeatSection = ({ title, seats }) => (
+    <div className="mb-6">
+      <h2 className="text-lg font-bold mb-2">{title}</h2>
+      <div className="grid grid-cols-5 gap-2">
+        {seats.map((row) => (
+          <React.Fragment key={row[0]}>
+            <button
+              type="button"
+              onClick={() => handleSeatClick(row[0])}
+              className={`p-2 border rounded ${
+                formData.seat === row[0] ? "bg-blue-500 text-white text-[10px] sm:text-[16px]" : "bg-gray-200 text-black text-[10px] sm:text-[16px]"
+              }`}
+            >
+              {row[0]}
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSeatClick(row[1])}
+              className={`p-2 border rounded ${
+                formData.seat === row[1] ? "bg-blue-500 text-white text-[10px] sm:text-[16px]" : "bg-gray-200 text-black text-[10px] sm:text-[16px]"
+              }`}
+            >
+              {row[1]}
+            </button>
+            <div className="w-4"></div> {/* Empty div for extra space */}
+            <button
+              type="button"
+              onClick={() => handleSeatClick(row[2])}
+              className={`p-2 border rounded ${
+                formData.seat === row[2] ? "bg-blue-500 text-white text-[10px] sm:text-[16px]" : "bg-gray-200 text-black text-[10px] sm:text-[16px]"
+              }`}
+            >
+              {row[2]}
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSeatClick(row[3])}
+              className={`p-2 border rounded ${
+                formData.seat === row[3] ? "bg-blue-500 text-white text-[10px] sm:text-[16px]" : "bg-gray-200 text-black text-[10px] sm:text-[16px]"
+              }`}
+            >
+              {row[3]}
+            </button>
+          </React.Fragment>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
 
   const handleSeatClick = (seat) => {
     setFormData((prevData) => ({
@@ -127,14 +161,59 @@ const SeatSection = ({ title, seats }) => (
     }));
   };
 
+  const handleAirportChange = (selectedOption, action) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [action.name]: selectedOption.value
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+  
+    const { kodepemesanan, namabelakang, airline, selectedDate, seat, originAirport, destinationAirport } = formData;
+    const selectedAirline = airlines.find(a => a.name === airline);
+  
     Swal.fire({
       icon: "success",
       title: "Checkin Successfully!",
-      text: "Thank you for your Checkin.",
+      html: `
+        <div style="text-align: center; display: flex;justify-content: center;">
+        <img src="${qr}" alt="QR Code" style="width: 150px; height: 150px; margin-bottom: 20px;">
+      </div>
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td style="text-align: left; padding: 4px;"><strong>Kode Pemesanan</strong></td>
+            <td style="text-align: left; padding: 4px;">: ${kodepemesanan}</td>
+          </tr>
+          <tr>
+            <td style="text-align: left; padding: 4px;"><strong>Nama Belakang</strong></td>
+            <td style="text-align: left; padding: 4px;">: ${namabelakang}</td>
+          </tr>
+          <tr>
+          <td style="text-align: left; padding: 4px;"><strong>Airline:</strong></td>
+          <td style="text-align: left; padding: 4px;">: ${airline} (${selectedAirline ? selectedAirline.flightCode : ''})</td>
+        </tr>
+          <tr>
+            <td style="text-align: left; padding: 4px;"><strong>Tanggal</strong></td>
+            <td style="text-align: left; padding: 4px;">: ${selectedDate ? selectedDate.toLocaleDateString() : ''}</td>
+          </tr>
+          <tr>
+            <td style="text-align: left; padding: 4px;"><strong>Seat</strong></td>
+            <td style="text-align: left; padding: 4px;">: ${seat}</td>
+          </tr>
+          <tr>
+            <td style="text-align: left; padding: 4px;"><strong>Bandara Asal</strong></td>
+            <td style="text-align: left; padding: 4px;">: ${originAirport}</td>
+          </tr>
+          <tr>
+            <td style="text-align: left; padding: 4px;"><strong>Bandara Tujuan</strong></td>
+            <td style="text-align: left; padding: 4px;">: ${destinationAirport}</td>
+          </tr>
+         
+        </table>
+      `,
       confirmButtonColor: "#3085d6",
       confirmButtonText: "OK"
     }).then((result) => {
@@ -145,12 +224,20 @@ const SeatSection = ({ title, seats }) => (
           message: "",
           airline: "",
           selectedDate: null,
-          seat: "" // Reset pilihan maskapai
+          seat: "",
+          originAirport: "",
+          destinationAirport: ""
         });
+  
+        if (originAirport === "Frans Kaisiepo International Airport" && destinationAirport === "Sultan Hasanuddin International Airport") {
+          window.open("https://drive.google.com/file/d/1mgx_WH93JwfijoBkvqYj26tUzXKqtFBB/view?usp=sharing", "_blank");
+        }
       }
     });
   };
-
+  
+  
+  
   const airlineOptions = airlines.map((airline) => ({
     value: airline.name,
     label: (
@@ -159,6 +246,11 @@ const SeatSection = ({ title, seats }) => (
         {airline.name}
       </div>
     )
+  }));
+
+  const airportOptions = airports.map((airport) => ({
+    value: airport.airport,
+    label: `${airport.city} - ${airport.airport}`
   }));
 
   return (
@@ -205,6 +297,30 @@ const SeatSection = ({ title, seats }) => (
           />
         </div>
         <div className="mb-4">
+          <label htmlFor="originAirport" className="block text-sm font-medium text-gray-700">Bandara Asal</label>
+          <Select
+            id="originAirport"
+            name="originAirport"
+            value={airportOptions.find(option => option.value === formData.originAirport)}
+            onChange={(option, action) => handleAirportChange(option, action)}
+            options={airportOptions}
+            className="mt-1"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="destinationAirport" className="block text-sm font-medium text-gray-700">Bandara Tujuan</label>
+          <Select
+            id="destinationAirport"
+            name="destinationAirport"
+            value={airportOptions.find(option => option.value === formData.destinationAirport)}
+            onChange={(option, action) => handleAirportChange(option, action)}
+            options={airportOptions}
+            className="mt-1"
+            required
+          />
+        </div>
+        <div className="mb-4">
           <label htmlFor="selectedDate" className="block text-sm font-medium text-gray-700">Select Date</label>
           <DatePicker
             id="selectedDate"
@@ -217,17 +333,13 @@ const SeatSection = ({ title, seats }) => (
             required
           />
         </div>
+       
         <div className="mb-4">
-    
-    <div className="mb-4">
-    <div className="mb-4">
-    <label className="block text-sm font-medium text-gray-700">Select Seat</label>
-    <SeatSection title="United First" seats={seats.slice(0, 2)} grid={'3'} />
-    <SeatSection title="Economy Premium" seats={seats.slice(2, 6)} grid={'4'} />
-    <SeatSection title="Economy" seats={seats.slice(6)}  grid={'4'}/>
-  </div>
-  </div>
-  </div>
+          <label className="block text-sm font-medium text-gray-700">Select Seat</label>
+          <SeatSection title="United First" seats={seats.slice(0, 2)} grid={'3'} />
+          <SeatSection title="Economy Premium" seats={seats.slice(2, 6)} grid={'4'} />
+          <SeatSection title="Economy" seats={seats.slice(6)} grid={'4'}/>
+        </div>
         <button
           type="submit"
           className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
