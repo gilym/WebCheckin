@@ -173,6 +173,16 @@ export default function NormfalForm() {
     console.log(formData);
   
     const { kodepemesanan, namabelakang, airline, selectedDate, seat, originAirport, destinationAirport } = formData;
+    if (!kodepemesanan || !namabelakang || !airline || !selectedDate || !seat || !originAirport || !destinationAirport) {
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text: "All fields are required. Please fill in all fields before submitting.",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "OK"
+      });
+      return;
+    }
     const selectedAirline = airlines.find(a => a.name === airline);
   
     Swal.fire({
