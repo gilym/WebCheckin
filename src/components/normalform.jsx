@@ -229,9 +229,7 @@ export default function NormfalForm() {
           destinationAirport: ""
         });
   
-        if (originAirport === "Frans Kaisiepo International Airport" && destinationAirport === "Sultan Hasanuddin International Airport") {
-          window.open("https://drive.google.com/file/d/1mgx_WH93JwfijoBkvqYj26tUzXKqtFBB/view?usp=sharing", "_blank");
-        }
+       
       }
     });
   };
